@@ -32,6 +32,14 @@ export default function DataProvider({ children }) {
             await axios.get(`http://localhost:3000/api/v1/dashboard/admin/:${user.user.id}`, { withCredentials: true })
                 .then((data) => {
                     setAdmin(data.data.user);
+                    axios.get(`http://localhost:3000/api/v1/upload/:${data.data.user.employee.image}`, { responseType: "blob", withCredentials: true })
+                        .then(data => {
+                            const reader = new FileReader();
+                            reader.readAsDataURL(data.data);
+                            reader.onload = function (e) {
+                                setProfileImage(e.target.result);
+                            }
+                        })
                 })
                 .catch(error => console.log(error));
         }
@@ -57,9 +65,6 @@ export default function DataProvider({ children }) {
             setEvents(eventsResult.data.events);
             setNews(newsResult.data.news);
             setMessages(messagesResult.data.messages);
-
-            const type = "data:image/jpg;base64,"
-            setProfileImage([type, user.user.picture].join(""));
         }
 
         fetchAdmin();
