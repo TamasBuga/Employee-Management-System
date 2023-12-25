@@ -8,6 +8,7 @@ const SUPPORTED_FORMATS = ["image/jpg", "image/png", "image/jpeg", "image/gif"];
 const hours = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"];
 const minutes = ["0", "5", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"];
 
+
 export const fetchData = async () => {
     const result = (
         await Promise.all([
@@ -189,4 +190,155 @@ export const newschema = yup.object().shape({
                     return true;
                 }
             }),
-})
+});
+
+
+export const selectHours = [
+    {
+        option: "0",
+        value: "00"
+    },
+    {
+        option: "1",
+        value: "01"
+    },
+    {
+        option: "2",
+        value: "02"
+    },
+    {
+        option: "3",
+        value: "03"
+    },
+    {
+        option: "4",
+        value: "04"
+    },
+    {
+        option: "5",
+        value: "05"
+    },
+    {
+        option: "6",
+        value: "06"
+    },
+    {
+        option: "7",
+        value: "07"
+    },
+    {
+        option: "8",
+        value: "08"
+    },
+    {
+        option: "9",
+        value: "09"
+    },
+    {
+        option: "10",
+        value: "10"
+    },
+    {
+        option: "11",
+        value: "11"
+    },
+    {
+        option: "12",
+        value: "12"
+    },
+    {
+        option: "13",
+        value: "13"
+    },
+    {
+        option: "14",
+        value: "14"
+    },
+    {
+        option: "15",
+        value: "15"
+    },
+    {
+        option: "16",
+        value: "16"
+    },
+    {
+        option: "17",
+        value: "17"
+    },
+    {
+        option: "18",
+        value: "18"
+    },
+    {
+        option: "19",
+        value: "19"
+    },
+    {
+        option: "20",
+        value: "20"
+    },
+    {
+        option: "21",
+        value: "21"
+    },
+    {
+        option: "22",
+        value: "22"
+    },
+    {
+        option: "23",
+        value: "23"
+    },
+];
+
+export const selectMinutes = [
+    {
+        option: "0",
+        value: "00"
+    },
+    {
+        option: "5",
+        value: "05"
+    },
+    {
+        option: "10",
+        value: "10"
+    },
+    {
+        option: "15",
+        value: "15"
+    },
+    {
+        option: "20",
+        value: "20"
+    },
+    {
+        option: "25",
+        value: "25"
+    },
+    {
+        option: "30",
+        value: "30"
+    },
+    {
+        option: "35",
+        value: "35"
+    },
+    {
+        option: "40",
+        value: "40"
+    },
+    {
+        option: "45",
+        value: "45"
+    },
+    {
+        option: "50",
+        value: "50"
+    },
+    {
+        option: "55",
+        value: "55"
+    }
+]

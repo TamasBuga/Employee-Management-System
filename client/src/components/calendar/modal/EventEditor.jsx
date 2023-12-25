@@ -5,7 +5,7 @@ import { FaSave, FaTrashAlt, FaRegClock, FaClock, FaPaintBrush, FaPencilAlt, FaA
 import uuid from "react-uuid";
 import UserInput from "../../Inputs";
 import { colors } from "../../../lib/colors";
-import { eventSchema } from "../../../lib/schemas";
+import { eventSchema, selectHours, selectMinutes } from "../../../lib/schemas";
 import { isEmpty } from "../../../lib/common";
 import axios from "axios";
 import { DataContext } from "../../../context/DataContext";
@@ -83,7 +83,6 @@ export default function EventEditor({
         }
     }
 
-
     return (
         <Formik
             initialValues={{
@@ -153,7 +152,7 @@ export default function EventEditor({
                                 name="startHour"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                values={Time.Hours}
+                                values={selectHours}
                                 className="text-lg font-bold text-center py-1"
                             />
                             <p className="font-bold">:</p>
@@ -163,7 +162,7 @@ export default function EventEditor({
                                 name="startMinute"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                values={Time.Minutes}
+                                values={selectMinutes}
                                 className="text-lg font-bold text-center py-1"
                             />
                         </div>
@@ -181,7 +180,7 @@ export default function EventEditor({
                                 name="endHour"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                values={Time.Hours}
+                                values={selectHours}
                                 className="text-lg font-bold text-center py-1"
                             />
                             <p className="font-bold">:</p>
@@ -191,7 +190,7 @@ export default function EventEditor({
                                 name="endMinute"
                                 onChange={handleChange}
                                 onBlur={handleBlur}
-                                values={Time.Minutes}
+                                values={selectMinutes}
                                 className="text-lg font-bold text-center py-1"
                             />
                         </div>
