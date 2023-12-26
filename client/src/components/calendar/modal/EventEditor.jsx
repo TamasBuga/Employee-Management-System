@@ -110,7 +110,7 @@ export default function EventEditor({
                     <div className="grid grid-cols-calModalField">
                         <div className="flex gap-1">
                             <FaPencilAlt className="text-xl" />
-                            <label htmlFor="title" className="font-bold">Cím</label>
+                            <label htmlFor="title" className="font-bold text-lg">Cím</label>
                         </div>
                         <UserInput
                             label={null}
@@ -126,7 +126,7 @@ export default function EventEditor({
                     <div className="grid grid-cols-calModalField">
                         <div className="flex gap-1">
                             <FaPencilAlt className="text-xl" />
-                            <label htmlFor="description" className="font-bold">Leírás</label>
+                            <label htmlFor="description" className="font-bold text-lg">Leírás</label>
                         </div>
                         <UserInput
                             label={null}
@@ -143,9 +143,10 @@ export default function EventEditor({
                     <div className="grid grid-cols-calModalField">
                         <div className="flex gap-1 items-center">
                             <FaRegClock className="text-xl" />
-                            <label htmlFor="startHour" className="font-bold">Mettől</label>
+                            <label htmlFor="startHour" className="font-bold text-lg">Mettől</label>
                         </div>
                         <div className="flex gap-2 items-center">
+                            <p className="font-bold">óra</p>
                             <UserInput
                                 label={null}
                                 type="select"
@@ -165,15 +166,17 @@ export default function EventEditor({
                                 values={selectMinutes}
                                 className="text-lg font-bold text-center py-1"
                             />
+                            <p className="font-bold">perc</p>
                         </div>
                     </div>
 
                     <div className="grid grid-cols-calModalField">
                         <div className="flex gap-1 items-center">
                             <FaClock className="text-xl" />
-                            <label htmlFor="endHour" className="font-bold">Meddig</label>
+                            <label htmlFor="endHour" className="font-bold text-lg">Meddig</label>
                         </div>
                         <div className="flex gap-2 items-center">
+                            <p className="font-bold">óra</p>
                             <UserInput
                                 label={null}
                                 type="select"
@@ -193,13 +196,14 @@ export default function EventEditor({
                                 values={selectMinutes}
                                 className="text-lg font-bold text-center py-1"
                             />
+                            <p className="font-bold">perc</p>
                         </div>
                     </div>
 
                     <div className="grid grid-cols-calModalField">
                         <span className="flex gap-2">
                             <FaPaintBrush className="text-xl" />
-                            <p className="font-bold">Szín:</p>
+                            <p className="font-bold text-lg">Szín:</p>
                         </span>
                         <ColorPalette setNewColor={setNewColor} />
                     </div>

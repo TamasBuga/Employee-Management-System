@@ -1,7 +1,7 @@
 
 
 
-import { FaUserEdit, FaPhone, FaBriefcaseMedical, FaUserPlus } from "react-icons/fa";
+import { FaUserEdit, FaPhone, FaBriefcaseMedical, FaUserLock  } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import DefaultImage from "../assets/default-image.png";
 import axios from "axios";
@@ -69,7 +69,7 @@ export default function UserCard({ user }) {
                         className="group p-1 flex flex-col h-14 w-14 border-4 border-transparent text-white text-3xl bg-orange-500 hover:bg-orange-300 gap-2 px-2 items-center justify-center transition-all cursor-pointer"
                         onClick={() => navigate(`/api/dashboard/users/register/${user._id}`)}
                     >
-                        <FaUserPlus className="transition-all" />
+                        <FaUserLock className="transition-all" />
                     </button>
                     : null
                 }
