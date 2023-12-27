@@ -1,7 +1,7 @@
 
 
 import { NavLink } from "react-router-dom";
-import { FaPlus } from "react-icons/fa";
+import { FaPlus, FaSearch } from "react-icons/fa";
 import UserCard from "../components/UserCard";
 import uuid from "react-uuid";
 import { Dna } from "react-loader-spinner";
@@ -13,6 +13,7 @@ import { DataContext } from "../context/DataContext";
 export default function AllUser() {
 
     const { employees, departments } = useContext(DataContext);
+    const [search, setSearch] = useState();
     const departmentList = () => {
         const groups = [];
         for (let i = 0; i < departments.length; i++) {
@@ -36,6 +37,14 @@ export default function AllUser() {
                 >
                     <FaPlus className="cursor-pointer transition-all text-5xl" />
                     <p className="text-lg border-t white font-bold">Új személy</p>
+                </NavLink>
+
+                <NavLink
+                    to={"/api/dashboard/users/searchuser"}
+                    className="group ml-4 flex flex-col h-32 w-32 border-4 border-transparent text-white text-2xl bg-orange-500 hover:bg-orange-300 gap-2 px-2 items-center justify-center transition-all cursor-pointer shadow-lg"
+                >
+                    <FaSearch className="cursor-pointer transition-all text-5xl" />
+                    <p className="text-lg border-t white font-bold">Keresés</p>
                 </NavLink>
             </div>
             <div className="flex flex-wrap gap-8">

@@ -1,7 +1,7 @@
 
 
 
-import { FaUserEdit, FaPhone, FaBriefcaseMedical, FaUserLock  } from "react-icons/fa";
+import { FaUserEdit, FaPhone, FaBriefcaseMedical, FaUserLock, FaHandHoldingMedical } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import DefaultImage from "../assets/default-image.png";
 import axios from "axios";
@@ -50,6 +50,10 @@ export default function UserCard({ user }) {
             <div className="flex flex-col justify-center items-center gap-4 py-10">
                 <h2 className="italic text-4xl text-center mt-6 text-slate-400">{user.lastName} {user.firstName}</h2>
                 <div className="flex items-center gap-2 text-xl">
+                    <FaHandHoldingMedical className="transition-all" />
+                    <p className="font-bold">{user.department.value}</p>
+                </div>
+                <div className="flex items-center gap-2 text-xl">
                     <FaBriefcaseMedical className="transition-all" />
                     <p className="font-bold">{user.post.value}</p>
                 </div>
@@ -63,7 +67,7 @@ export default function UserCard({ user }) {
                 >
                     <FaUserEdit className="transition-all" />
                 </button>
-                
+
                 {admin.role.type === "SUPER_ADMIN"
                     ? <button
                         className="group p-1 flex flex-col h-14 w-14 border-4 border-transparent text-white text-3xl bg-orange-500 hover:bg-orange-300 gap-2 px-2 items-center justify-center transition-all cursor-pointer"

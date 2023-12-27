@@ -19,6 +19,7 @@ import ContextLayout from "./layouts/ContextLayout";
 import Departments from "./pages/Departments";
 import Posts from "./pages/Posts";
 import EditItem from "./pages/EditItem";
+import SearchUser from "./pages/SearchUser";
 
 
 
@@ -49,6 +50,7 @@ function App() {
                 <Route path="edit/department/:id" element={<EditItem />} />
                 <Route path="edit/post/:id" element={<EditItem />} />
                 <Route path="register/:id" element={<Register />} />
+                <Route path="searchuser" element={<SearchUser />} />
               </Route>
 
               <Route path="calendar/:id" element={<CalendarLayout />} />
