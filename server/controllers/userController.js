@@ -5,7 +5,7 @@ const Employee = require('../models/Employee');
 const Role = require('../models/Role');
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const { authenticationErrorMessage, serverErrorMessage } = require("../resources/errorMessages");
+const { authenticationErrorMessage } = require("../resources/errorMessages");
 
 
 // get Admin

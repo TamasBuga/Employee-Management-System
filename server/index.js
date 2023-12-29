@@ -7,6 +7,7 @@ const cors = require('cors');
 const api = require('./admin/api');
 const helmet = require("helmet");
 const mongoose = require('mongoose');
+const cookieParser = require("cookie-parser");
 
 // Connect to MONGO DB
 (async () => {
@@ -23,6 +24,7 @@ const corsOptions = {
 app.use(helmet());
 app.use(cors(corsOptions));
 app.use(express.json({ limit: "1.6mb" }));
+app.use(cookieParser());
 
 app.use('/api/v1', api);
 

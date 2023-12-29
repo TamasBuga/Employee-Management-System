@@ -37,7 +37,8 @@ export default function UserCard({ user }) {
         if (user.image !== undefined) {
             fetchImage();
         }
-    }, [])
+    }, []);
+
 
     return (
         <article className="flex flex-col w-[260px] shadow-xl bg-white">
@@ -68,11 +69,10 @@ export default function UserCard({ user }) {
                     <FaUserEdit className="transition-all" />
                 </button>
 
-                {admin.role.type === "SUPER_ADMIN"
+                {admin.role.type === "SUPER_ADMIN" && !user.role
                     ? <button
                         className="group p-1 flex flex-col h-14 w-14 border-4 border-transparent text-white text-3xl bg-orange-500 hover:bg-orange-300 gap-2 px-2 items-center justify-center transition-all cursor-pointer"
-                        onClick={() => navigate(`/api/dashboard/users/register/${user._id}`)}
-                    >
+                        onClick={() => navigate(`/api/dashboard/users/register/${user._id}`)}>
                         <FaUserLock className="transition-all" />
                     </button>
                     : null

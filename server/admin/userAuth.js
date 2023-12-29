@@ -3,10 +3,8 @@ require('dotenv').config();
 
 const express = require('express');
 const router = express.Router();
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
-const { getFile } = require("../controllers/uploadController");
 
 
 
@@ -32,7 +30,7 @@ router.post('/login', async (req, res) => {
     if (!checkPassword)
         return res.status(401).send("Hibás felhasználónév vagy jelszó!");
 
-    return res.send({
+    return res.json({
         user: {
             id: user._id,
             role: user.role.type
