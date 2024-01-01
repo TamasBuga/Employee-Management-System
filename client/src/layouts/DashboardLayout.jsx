@@ -15,7 +15,7 @@ import { DataContext } from "../context/DataContext";
 export default function DashboardLayout() {
 
     const [active, setActive] = useState(false);
-    const { admin, profileImage } = useContext(DataContext);
+    const { admin : user, profileImage } = useContext(DataContext);
     
     const handleLogout = () => {
         const quit = confirm("Biztos ki szeretne lépni?");
@@ -26,7 +26,7 @@ export default function DashboardLayout() {
 
     return (
         <>
-            {!admin
+            {!user
                 ? <Dna
                     visible={true}
                     height="80"
@@ -43,7 +43,7 @@ export default function DashboardLayout() {
                                         <img src={profileImage ? profileImage : DefaultImage} alt="profile-image" className=" bg-gray-200" />
                                     </div>
                                     <div className="flex flex-col justify-center">
-                                        <p className="text-xl text-white font-bold italic border-b-2 border-orange-500">{admin.employee.lastName} {admin.employee.firstName}</p>
+                                        <p className="text-xl text-white font-bold italic border-b-2 border-orange-500">{user.employee.lastName} {user.employee.firstName}</p>
                                     </div>
                                 </div>
                                 <button className="group p-2 rounded-lg border-4 border-gray-300 text-gray-700 min-[768px]:hidden hover:border-red-300 transition-all" type="button" onClick={() => setActive(!active)}>
@@ -63,11 +63,11 @@ export default function DashboardLayout() {
                                         </li>
                                         <li className="flex items-center p-2 hover:text-black hover:border-y-2 hover:border-gray-300 hover:indent-4 hover:bg-slate-200 hover:font-bold border-y-2 border-transparent transition-all cursor-pointer">
                                             <FaRegCalendarAlt />
-                                            <NavLink to={`/api/dashboard/calendar/${admin.employee._id}`} className={"w-full h-full"} onClick={() => setActive(false)} >Naptáram</NavLink>
+                                            <NavLink to={`/api/dashboard/calendar/${user.employee._id}`} className={"w-full h-full"} onClick={() => setActive(false)} >Naptáram</NavLink>
                                         </li>
                                         <li className="flex items-center p-2 hover:text-black hover:border-y-2 hover:border-gray-300 hover:indent-4 hover:bg-slate-200 hover:font-bold border-y-2 border-transparent transition-all cursor-pointer">
                                             <FaUser />
-                                            <NavLink to={`/api/dashboard/profile/${admin.employee._id}`} className={"w-full h-full"} onClick={() => setActive(false)} >Profilom</NavLink>
+                                            <NavLink to={`/api/dashboard/profile/${user.employee._id}`} className={"w-full h-full"} onClick={() => setActive(false)} >Profilom</NavLink>
                                         </li>
                                         <li className="flex items-center p-2 hover:text-black hover:border-y-2 hover:border-gray-300 hover:indent-4 hover:bg-slate-200 hover:font-bold border-y-2 border-transparent transition-all cursor-pointer">
                                             <FaSignOutAlt />
@@ -97,13 +97,13 @@ export default function DashboardLayout() {
                                         </NavLink>
                                     </li>
                                     <li className="flex items-center hover:indent-4 hover:bg-white hover:font-bold border-y-2 border-transparent transition-all cursor-pointer">
-                                        <NavLink to={`/api/dashboard/calendar/${admin.employee._id}`} className={"flex items-center p-2 w-full h-full"} >
+                                        <NavLink to={`/api/dashboard/calendar/${user.employee._id}`} className={"flex items-center p-2 w-full h-full"} >
                                             <FaRegCalendarAlt />
                                             Naptáram
                                         </NavLink>
                                     </li>
                                     <li className="flex items-center hover:indent-4 hover:bg-white hover:font-bold border-y-2 border-transparent transition-all cursor-pointer">
-                                        <NavLink to={`/api/dashboard/profile/${admin.employee._id}`} className={"flex items-center p-2 w-full h-full"} >
+                                        <NavLink to={`/api/dashboard/profile/${user.employee._id}`} className={"flex items-center p-2 w-full h-full"} >
                                             <FaUser />
                                             Profilom
                                         </NavLink>

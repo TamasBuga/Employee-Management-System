@@ -13,7 +13,7 @@ import { DataContext } from "../context/DataContext";
 export default function AllUser() {
 
     const { employees, departments } = useContext(DataContext);
-    const [search, setSearch] = useState();
+    // Group Employees by Department
     const departmentList = () => {
         const groups = [];
         for (let i = 0; i < departments.length; i++) {
@@ -60,11 +60,13 @@ export default function AllUser() {
                             <div key={uuid()} className="flex w-full flex-col gap-4 p-4 border-t border-teal-800">
                                 <h2 className="text-4xl italic tracking-widest font-bold text-black">{department.departmentName}</h2>
                                 <div className="flex flex-wrap gap-4 max-sm:justify-center">
+
                                     {department.employees.map(employee => {
                                         return (
                                             <UserCard key={uuid()} user={employee} />
                                         )
                                     })}
+
                                 </div>
                             </div>
                         )

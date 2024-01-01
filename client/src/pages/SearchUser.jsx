@@ -1,15 +1,17 @@
 
 
-import React, { useContext, useState } from 'react'
-import { DataContext } from '../context/DataContext'
-import UserCard from '../components/UserCard';
+import React, { useContext, useState } from 'react';
 import uuid from 'react-uuid';
+
+import { DataContext } from '../context/DataContext';
+import UserCard from '../components/UserCard';
 
 
 export default function SearchUser() {
 
     const { employees } = useContext(DataContext);
     const [search, setSearch] = useState("");
+
 
     const searchResult = () => {
         if (search !== "") {
@@ -35,6 +37,7 @@ export default function SearchUser() {
 
     return (
         <div className="flex flex-col gap-8 p-4">
+            
             <input
                 type="text"
                 name="search"
@@ -46,6 +49,7 @@ export default function SearchUser() {
                 value={search}
                 className="p-2 text-lg font-bold italic text-center shadow-lg w-[320px]"
             />
+
             <div className='flex flex-wrap gap-8 justify-center'>
                 {searchResult()
                     ? searchResult().map(user => {

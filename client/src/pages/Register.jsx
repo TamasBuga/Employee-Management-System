@@ -1,13 +1,14 @@
 
 
 
+import { useNavigate, useParams } from "react-router-dom";
+import { FaSave } from "react-icons/fa";
 import { Formik, Form } from "formik";
+import { useEffect } from "react";
+import axios from "axios";
+
 import UserInput from "../components/Inputs";
 import { registerSchema } from "../lib/schemas";
-import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { FaSave } from "react-icons/fa";
 
 
 export default function Register() {
@@ -15,11 +16,13 @@ export default function Register() {
     const navigate = useNavigate();
     const { id } = useParams();
 
+
     useEffect(() => {
         if (!id) {
             navigate("/api/dashboard/home/news")
         }
-    }, [])
+    }, []);
+
 
     return (
         <Formik
@@ -53,8 +56,10 @@ export default function Register() {
                 handleBlur,
                 handleChange
             }) => (
+
                 <Form className="flex flex-col gap-6 p-6 justify-center">
 
+                    {/* Username */}
                     <UserInput
                         label={"Felhasználónév"}
                         type={"text"}
@@ -65,6 +70,7 @@ export default function Register() {
                         className="w-full text-lg font-bold text-center py-2"
                     />
 
+                    {/* Password */}
                     <UserInput
                         label={"Jelszó"}
                         type={"password"}
@@ -75,6 +81,7 @@ export default function Register() {
                         className="w-full text-lg font-bold text-center py-2"
                     />
 
+                    {/* Confirm Password */}
                     <UserInput
                         label={"Jelszó újra"}
                         type={"password"}
@@ -85,7 +92,7 @@ export default function Register() {
                         className="w-full text-lg font-bold text-center py-2"
                     />
 
-
+                    {/* Create new ROLE for an Employee */} 
                     <div className="w-full flex flex-col my-2 text-center items-center">
                         <button
                             className="group flex flex-col h-32 w-32 border-4 border-transparent text-white text-2xl bg-orange-500 hover:bg-orange-300 gap-2 px-2 items-center justify-center transition-all cursor-pointer shadow-lg disabled:bg-slate-500"

@@ -1,12 +1,12 @@
 
 
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from "react-icons/fa";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import uuid from "react-uuid";
 
 import CalendarSheet from "./CalendarSheet";
 import CalendarItem from "./CalendarItem";
 import Modal from "./modal/Modal";
-import uuid from "react-uuid";
 
 
 export default function Calendar() {
@@ -24,6 +24,7 @@ export default function Calendar() {
     }
 
 
+    // Set Modal
     useEffect(() => {
         document.body.style.overflow = isOpen ? "hidden" : ""
     }, [isOpen]);
@@ -35,11 +36,9 @@ export default function Calendar() {
     }
 
 
-
+    // Calendar for wide screens
     function WideCalendar({ currentDate }) {
-
         const Calendar = CalendarSheet({ currentDate });
-
         return (
             <>
                 {Calendar.map(item => {
@@ -70,11 +69,9 @@ export default function Calendar() {
     }
 
 
-
+    // Calendar for mobile
     function WrappedCalendar({ currentDate }) {
-
         const Calendar = CalendarSheet({ currentDate });
-
         return (
             <>
                 {Calendar.map(item => {
@@ -105,6 +102,7 @@ export default function Calendar() {
         )
     }
 
+    // Return main component
     return (
         <div className="max-w-7xl p-4">
             <div className="flex flex-col items-center gap-4 mb-8">
@@ -143,17 +141,19 @@ export default function Calendar() {
                 </div>
 
 
-                {/* FOR WIDE SCREENS */}
+                {/* Calendar for wide screens */}
                 <div className="w-full grid grid-rows-6 max-sm:text-md">
                     <WideCalendar currentDate={currentDate} />
                 </div>
             </div>
 
-            {/* WRAPPED CALENDAR */}
+            {/* Calendar for mobile */}
             <div className="flex flex-col gap-4 min-[640px]:hidden">
                 <WrappedCalendar currentDate={currentDate} />
             </div>
 
+
+            {/* Modal */}
             {isOpen ?
                 <Modal
                     date={selectedDate}

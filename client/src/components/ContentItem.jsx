@@ -2,11 +2,12 @@
 
 
 import { useState, useEffect, useContext } from "react";
+import { FaPencilAlt, FaArrowDown, FaArrowUp } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
 import { DataContext } from "../context/DataContext";
 import { formatDate } from "../lib/common";
-import { useNavigate } from "react-router-dom";
-import { FaPencilAlt, FaArrowDown, FaArrowUp } from "react-icons/fa";
 
 
 export default function ContentItem({
@@ -24,6 +25,7 @@ export default function ContentItem({
         navigate(`/api/dashboard/home/news/${data._id}`);
     }
 
+    // Get News Component Image
     useEffect(() => {
         const fetchData = async () => {
             await axios.get(`http://localhost:3000/api/v1/upload/:${data.image}`, { responseType: "blob", withCredentials: true })
@@ -48,6 +50,8 @@ export default function ContentItem({
                 ? <img src={itemImage} alt="content-image" className="w-full h-auto" />
                 : <span className="w-full h-64 bg-slate-400"></span>
             }
+
+            {/* If user is Admin */}
             {user._id === admin.employee._id
                 ? <button
                     className="group absolute top-2 right-2 p-1 flex flex-col h-10 w-10 border-4 border-transparent text-white text-2xl bg-orange-500 hover:bg-orange-300 gap-2 px-2 items-center justify-center transition-all cursor-pointer"
@@ -57,14 +61,17 @@ export default function ContentItem({
                 </button>
                 : null
             }
+
             <p className="pt-2 pl-2 italic font-bold text-lg tracking-widest text-slate-400">{formatDate(data.createdAt)}</p>
             <div className="w-full flex flex-col">
                 <h2 className="p-4 max-sm:p-4 text-3xl italic font-bold text-black">{data.title}</h2>
             </div>
+
             {showMore
                 ? <p className="indent-8 text-justify text-lg font-medium p-4">{data.description}</p>
                 : null
             }
+            
             <div className="flex items-center justify-between">
                 <button
                     className="group flex flex-col h-10 w-10 m-4 border-4 border-transparent text-white text-2xl bg-orange-500 hover:bg-orange-300 gap-2 px-2 items-center justify-center transition-all cursor-pointer shadow-lg"

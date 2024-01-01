@@ -3,9 +3,10 @@
 
 import { FaUserEdit, FaPhone, FaBriefcaseMedical, FaUserLock, FaHandHoldingMedical } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import DefaultImage from "../assets/default-image.png";
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import axios from "axios";
+
+import DefaultImage from "../assets/default-image.png";
 import { DataContext } from "../context/DataContext";
 
 
@@ -18,6 +19,7 @@ export default function UserCard({ user }) {
         navigate(`/api/dashboard/users/useredit/${user._id}`);
     }
 
+    // Fetch user image
     useEffect(() => {
         const fetchImage = async () => {
             if (user._id === admin.employee._id) {
@@ -43,10 +45,12 @@ export default function UserCard({ user }) {
     return (
         <article className="flex flex-col w-[260px] shadow-xl bg-white">
             <div className="flex justify-center w-full h-24 bg-teal-800 relative">
+
                 {image
                     ? <img src={image} alt="user-image" className="w-32 h-32 rounded-full absolute top-6" />
                     : <img src={DefaultImage} alt="user-image" className="w-32 h-32 rounded-full absolute top-6" />
                 }
+
             </div>
             <div className="flex flex-col justify-center items-center gap-4 py-10">
                 <h2 className="italic text-4xl text-center mt-6 text-slate-400">{user.lastName} {user.firstName}</h2>
@@ -69,6 +73,7 @@ export default function UserCard({ user }) {
                     <FaUserEdit className="transition-all" />
                 </button>
 
+                {/* If user is super admin set role for employee */}
                 {admin.role.type === "SUPER_ADMIN" && !user.role
                     ? <button
                         className="group p-1 flex flex-col h-14 w-14 border-4 border-transparent text-white text-3xl bg-orange-500 hover:bg-orange-300 gap-2 px-2 items-center justify-center transition-all cursor-pointer"

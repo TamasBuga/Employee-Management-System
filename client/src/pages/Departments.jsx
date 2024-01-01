@@ -1,23 +1,24 @@
 
 
 
-import { useContext, useEffect, useState } from "react";
-import { DataContext } from "../context/DataContext";
+import { useContext } from "react";
 import uuid from "react-uuid";
-import InfoCard from "../components/InfoCard";
 import { FaPlus } from "react-icons/fa";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Dna } from "react-loader-spinner";
+
+import InfoCard from "../components/InfoCard";
+import { DataContext } from "../context/DataContext";
 
 
 
 export default function Departments() {
 
-    const { departments, admin } = useContext(DataContext);
+    const { departments, admin : user } = useContext(DataContext);
 
     return (
         <>
-            {admin.role.type === "SUPER_ADMIN"
+            {user.role.type === "SUPER_ADMIN"
                 ? <div className="flex gap-2">
                     <NavLink
                         to={"/api/dashboard/users/add/department"}

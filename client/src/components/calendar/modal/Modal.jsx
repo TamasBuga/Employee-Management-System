@@ -2,11 +2,11 @@
 
 import { useContext, useEffect, useState } from "react";
 import { FaRegTimesCircle , FaRegPlusSquare } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 
 import { formatDate } from "../../../lib/common";
 import ListOfEvents from "./ListOfEvents";
 import EventEditor from "./EventEditor";
-import { useParams } from "react-router-dom";
 import { DataContext } from "../../../context/DataContext";
 
 

@@ -30,7 +30,6 @@ export default function Login() {
                         const data = await request.data;
 
                         if (request.statusText === "OK") {
-                            console.log(data);
                             localStorage.setItem("user", JSON.stringify(data));
                             navigate("/api/dashboard/home/news");
                         }

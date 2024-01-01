@@ -1,13 +1,14 @@
 
 
 
-import { useContext, useState, useEffect } from "react";
-import { DataContext } from "../context/DataContext";
-import uuid from "react-uuid";
-import InfoCard from "../components/InfoCard";
+import { Dna } from "react-loader-spinner";
 import { NavLink } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
-import { Dna } from "react-loader-spinner";
+import { useContext } from "react";
+import uuid from "react-uuid";
+
+import InfoCard from "../components/InfoCard";
+import { DataContext } from "../context/DataContext";
 
 
 

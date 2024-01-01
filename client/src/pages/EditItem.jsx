@@ -1,15 +1,16 @@
 
 
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react';
 import { FaSave, FaArrowLeft, FaTrashAlt, FaNotesMedical } from "react-icons/fa";
-import { Formik, Form } from "formik";
-import UserInput from "../components/Inputs";
-import { itemSchema } from "../lib/schemas";
 import { useLocation, useNavigate } from 'react-router-dom';
-import { DataContext } from '../context/DataContext';
-import axios from 'axios';
 import { Dna } from "react-loader-spinner";
+import { Formik, Form } from "formik";
+import axios from 'axios';
+
+import { itemSchema } from "../lib/schemas";
+import { DataContext } from '../context/DataContext';
+import UserInput from "../components/Inputs";
 
 
 export default function EditItem() {
@@ -26,9 +27,10 @@ export default function EditItem() {
     const isDepartment = [id, locate, handler].includes("department");
     const { departments, posts, setDepartments, setPosts } = useContext(DataContext);
     const [itemValues, setItemValues] = useState();
+
+
     const handleSubmit = async (values, actions) => {
         actions.setSubmitting(true);
-
 
         if (id && isEditing && isDepartment) {
             await axios.put(`http://localhost:3000/api/v1/departments/:${id}`,
@@ -45,7 +47,6 @@ export default function EditItem() {
                     actions.setSubmitting(false)
                 })
 
-
         } else if (id && isEditing && isPost) {
             await axios.put(`http://localhost:3000/api/v1/posts/:${id}`,
                 values,
@@ -61,7 +62,6 @@ export default function EditItem() {
                     actions.setSubmitting(false);
                 })
         } else {
-
 
             if (isDepartment && isCreating) {
                 await axios.post("http://localhost:3000/api/v1/departments/add-department",
@@ -115,11 +115,11 @@ export default function EditItem() {
         }
     }
 
+
     const handleDelete = async () => {
         const conf = confirm(`Biztos törli ezt? ${itemValues.value}`);
 
         if (conf) {
-
 
             if (id && isEditing && isDepartment) {
                 await axios.delete(`http://localhost:3000/api/v1/departments/:${id}`,
@@ -167,6 +167,7 @@ export default function EditItem() {
         }
     }
 
+
     useEffect(() => {
         const getItem = async () => {
             if (isPost) {
@@ -184,6 +185,7 @@ export default function EditItem() {
     }, [departments, posts]);
 
 
+    
     return (
         <>
             {departments && posts

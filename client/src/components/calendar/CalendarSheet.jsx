@@ -14,15 +14,12 @@ export default function CalendarSheet({ currentDate }) {
     let currentDay = 1;
 
     for (let i = 0; i < 6; i++) {
+
         let array = [];
+
         for (let j = 1; j < 8; j++) {
 
             const dayObject = {
-                id: "",
-                date: 0,
-                month: 0,
-                year: 0,
-                isCurrent: true,
                 dateString() { return [this.year, this.month, this.date].join("-") }
             }
 

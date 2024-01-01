@@ -3,11 +3,12 @@ import { useContext, useState } from "react";
 import { Formik, Form } from "formik";
 import { FaSave, FaTrashAlt, FaRegClock, FaClock, FaPaintBrush, FaPencilAlt, FaArrowLeft } from "react-icons/fa";
 import uuid from "react-uuid";
+import axios from "axios";
+
 import UserInput from "../../Inputs";
 import { colors } from "../../../lib/colors";
-import { eventSchema, selectHours, selectMinutes } from "../../../lib/schemas";
 import { isEmpty } from "../../../lib/common";
-import axios from "axios";
+import { eventSchema, selectHours, selectMinutes } from "../../../lib/schemas";
 import { DataContext } from "../../../context/DataContext";
 
 
@@ -42,8 +43,11 @@ export default function EventEditor({
     eventDate
 }) {
 
+
     const [newColor, setNewColor] = useState(event.color || colors[Math.floor(Math.random() * (colors.length - 1))].color);
     const { setEvents } = useContext(DataContext);
+
+
     const handleDelete = async (item) => {
         await axios.delete(`http://localhost:3000/api/v1/events/:${item._id}`, { withCredentials: true })
             .then(() => console.log("Event deleted"))
@@ -54,6 +58,8 @@ export default function EventEditor({
             })
             .catch(error => console.log(error));
     }
+
+
     const handleSubmit = async (values, actions) => {
         try {
             actions.setSubmitting(true);
@@ -63,18 +69,22 @@ export default function EventEditor({
                 userID: userID,
                 color: newColor
             }
+
             if (!isEmpty(event)) {
+                // Event updated!
                 await axios.put(`http://localhost:3000/api/v1/events/:${event._id}`, eventData, { withCredentials: true });
-                console.log("Event updated!");
             } else {
+                // Event created!
                 await axios.post(`http://localhost:3000/api/v1/events/add-event`, eventData, { withCredentials: true });
-                console.log("Event created!");
             }
+
+            // Refresh events data
             await axios.get("http://localhost:3000/api/v1/events/")
                 .then(data => {
                     setEvents(data.data.events)
                 })
                 .catch(error => console.log(error));
+
         } catch (error) {
             console.log(error);
         } finally {
@@ -106,7 +116,7 @@ export default function EventEditor({
 
                 <div className="flex flex-col w-full gap-4 p-4 border-4 border-white" style={{ backgroundColor: newColor }}>
 
-
+                    {/* Event Title */}
                     <div className="grid grid-cols-calModalField">
                         <div className="flex gap-1">
                             <FaPencilAlt className="text-xl" />
@@ -123,6 +133,7 @@ export default function EventEditor({
                         />
                     </div>
 
+                    {/* Event Description */}
                     <div className="grid grid-cols-calModalField">
                         <div className="flex gap-1">
                             <FaPencilAlt className="text-xl" />
@@ -140,6 +151,7 @@ export default function EventEditor({
                         />
                     </div>
 
+                    {/* Event Start Time */}
                     <div className="grid grid-cols-calModalField">
                         <div className="flex gap-1 items-center">
                             <FaRegClock className="text-xl" />
@@ -170,6 +182,7 @@ export default function EventEditor({
                         </div>
                     </div>
 
+                    {/* Event End Time */}
                     <div className="grid grid-cols-calModalField">
                         <div className="flex gap-1 items-center">
                             <FaClock className="text-xl" />
@@ -200,6 +213,7 @@ export default function EventEditor({
                         </div>
                     </div>
 
+                    {/* Event Color */}
                     <div className="grid grid-cols-calModalField">
                         <span className="flex gap-2">
                             <FaPaintBrush className="text-xl" />
@@ -209,6 +223,7 @@ export default function EventEditor({
                     </div>
                 </div>
 
+                {/* Event Handlers */}
                 <div className="flex flex-wrap justify-between p-2 gap-2">
                     <button className="group flex flex-col h-32 w-32 focus:bg-teal-600 focus:border-4 focus:border-orange-500 border-4 border-transparent text-white text-2xl bg-teal-800 hover:bg-teal-600 gap-2 px-2 items-center justify-center transition-all cursor-pointer shadow-lg"
                         type="submit"

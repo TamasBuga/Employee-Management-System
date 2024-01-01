@@ -1,14 +1,15 @@
 
 
 
-import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from 'react-router-dom';
-import { FaTrashAlt, FaSave } from "react-icons/fa";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import axios from "axios";
+import { useNavigate, useParams } from 'react-router-dom';
+import { useContext, useEffect, useState } from "react";
+import { FaTrashAlt, FaSave } from "react-icons/fa";
 import { Dna } from "react-loader-spinner";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css'
+import axios from "axios";
+
 import PreviewFile from "../components/PreviewFile";
 import Calendar from "../components/calendar/Calendar";
 import UserInput from "../components/Inputs";
@@ -32,6 +33,7 @@ export default function EditUser() {
     });
     const isUndefined = value => value === undefined ? true : false;
 
+    
     useEffect(() => {
         const fetchEmployee = async () => {
             if (employees && events && id) {

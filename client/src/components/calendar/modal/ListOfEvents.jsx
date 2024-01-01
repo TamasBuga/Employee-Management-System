@@ -11,8 +11,6 @@ function InputItem({
     setAddEvent
 }) {
 
-
-
     return (
         <div className="w-full max-w-sm flex gap-2 items-center justify-between shadow-md text-lg p-4 border-4 border-white" style={{ backgroundColor: event.color }}>
             <div className="flex flex-col gap-2">
@@ -32,8 +30,7 @@ function InputItem({
 
 
 export default function ListOfEvents({ events, setSelectedEvent, setAddEvent }) {
-
-    return (
+    return ( 
         <>
             {events?.map(event => {
                 return (

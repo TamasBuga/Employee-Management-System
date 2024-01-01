@@ -1,16 +1,16 @@
 
 
-import React, { useState, useEffect, useContext } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { Formik, Form, ErrorMessage } from 'formik';
-import UserInput from '../components/Inputs';
 import { FaNotesMedical, FaSave, FaArrowLeft, FaTrashAlt } from "react-icons/fa";
-import { DataContext } from '../context/DataContext';
-import { newschema } from "../lib/schemas";
-import PreviewFile from '../components/PreviewFile';
+import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Formik, Form, ErrorMessage } from 'formik';
 import { Dna } from "react-loader-spinner";
 import axios from 'axios';
-import { toast, ToastContainer } from "react-toastify";
+
+import UserInput from '../components/Inputs';
+import { newschema } from "../lib/schemas";
+import PreviewFile from '../components/PreviewFile';
+import { DataContext } from '../context/DataContext';
 
 
 
@@ -24,6 +24,7 @@ export default function EditNews() {
         file: undefined,
         previewURI: undefined
     });
+
 
     const handleSubmit = async (values, actions) => {
         const formValues = {
@@ -46,13 +47,15 @@ export default function EditNews() {
                         "Content-Type": "multipart/form-data"
                     }
                 })
-                .catch(error => toast.error("A képet nem tudtuk feltölteni! " + error.message));
+                .catch(error => alert("A képet nem tudtuk feltölteni! " + error.message));
             formValues.image = updateImage.data.id;
         }
+
+        // URL has id
         if (id) {
+            // Update News
             await axios.put(`http://localhost:3000/api/v1/news/:${id}`, formValues, { withCredentials: true })
                 .then(async data => {
-                    toast.success(data.data.message);
                     await axios.get("http://localhost:3000/api/v1/news", { withCredentials: true })
                         .then(data => {
                             setNews(data.data.news);
@@ -60,11 +63,11 @@ export default function EditNews() {
                             navigate("/api/dashboard/home/news");
                         })
                 })
-                .catch(error => toast.error("Hiba történt! " + error.message));
+                .catch(error => alert("Hiba történt! " + error.message));
         } else {
+            // Create News
             await axios.post('http://localhost:3000/api/v1/news/add-news', formValues, { withCredentials: true })
                 .then(async data => {
-                    toast.success(data.data.message);
                     await axios.get("http://localhost:3000/api/v1/news", { withCredentials: true })
                         .then(data => {
                             setNews(data.data.news);
@@ -72,7 +75,7 @@ export default function EditNews() {
                             navigate("/api/dashboard/home/news");
                         })
                 })
-                .catch(error => toast.error("Hiba történt! " + error.message));
+                .catch(error => alert("Hiba történt! " + error.message));
         }
     }
 
@@ -80,19 +83,16 @@ export default function EditNews() {
         const conf = confirm("Biztosan törli ezt a bejegyzést?");
 
         if (conf) {
-
-
+            // If accepted delete item
             await axios.delete(`http://localhost:3000/api/v1/news/:${id}`,
                 { withCredentials: true })
                 .then(async () => {
-                    // alert("Személy sikeresen törölve!");
-                    toast.success("Bejegyzés sikeresen törölve!");
+                    alert("Személy sikeresen törölve!");
                     if (newsItem.image) {
                         await axios.delete(`http://localhost:3000/api/v1/upload/:${newsItem.image}`,
                             { withCredentials: true })
                             .catch(error => {
-                                // alert("Hiba Történt a fénykép törlésénél! " + error.message);
-                                toast.error(error.message);
+                                alert("Hiba Történt a fénykép törlésénél! " + error.message);
                             });
                     }
                     await axios.get("http://localhost:3000/api/v1/news/",
@@ -100,18 +100,17 @@ export default function EditNews() {
                         .then(data => {
                             setNews(data.data.news);
                         }).catch(error => {
-                            // alert("Hiba Történt a személyzet betöltésénél! " + error.message)
-                            toast.error(error.message);
+                            alert("Hiba Történt a személyzet betöltésénél! " + error.message);
                         });
                     setNewsItem(null);
                     navigate("/api/dashboard/home/news");
                 })
                 .catch(error => {
-                    // alert("Hiba Történt a személy törlésénél! " + error.message);
-                    toast.error(error.message);
+                    alert("Hiba Történt a személy törlésénél! " + error.message);
                 });
         }
-    }
+    };
+
 
     useEffect(() => {
         const getItem = async () => {
@@ -128,18 +127,6 @@ export default function EditNews() {
 
     return (
         <>
-            <ToastContainer
-                position='top-center'
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme='light'
-            />
             {news
                 ? <Formik
                     enableReinitialize
@@ -156,6 +143,7 @@ export default function EditNews() {
                     values,
                     isSubmitting
                 }) => (
+
                     <Form className="flex flex-col gap-4 p-4 my-10 max-w-lg bg-slate-200 border-2 border-slate-800">
 
                         <div className='flex gap-2 items-center'>
@@ -164,6 +152,7 @@ export default function EditNews() {
                         </div>
                         <hr className="border my" />
 
+                        {/* News title */}
                         <UserInput
                             label={"Cím"}
                             type={"text"}
@@ -175,6 +164,7 @@ export default function EditNews() {
                             className="w-full text-lg font-bold text-center py-2"
                         />
 
+                        {/* News description */}
                         <div className="flex flex-col gap-2">
                             <p className="text-2xl font-bold">Leírás</p>
                             <UserInput
@@ -189,7 +179,7 @@ export default function EditNews() {
                             />
                         </div>
 
-                        {/* NEWS IMAGE */}
+                        {/* News image */}
                         <div className="w-full max-w-xl flex max-sm:flex-col justify-between items-center my-2 text-center">
                             <div className="w-full max-w-xs h-full max-h-80 overflow-hidden text-lg font-bold shadow-lg">
                                 <PreviewFile
@@ -204,6 +194,7 @@ export default function EditNews() {
                             <ErrorMessage component="p" name="image" className={"text-center text-md text-red-500 py-2 font-bold"} />
                         </div>
 
+                        {/* Handle News */}
                         <div className='flex gap-4 max-sm:flex-col'>
                             <button
                                 className="group flex flex-col h-32 w-32 border-4 border-transparent text-white text-2xl bg-orange-500 hover:bg-orange-300 gap-2 px-2 items-center justify-center transition-all cursor-pointer shadow-lg disabled:bg-slate-500"
@@ -222,6 +213,8 @@ export default function EditNews() {
                                 <FaArrowLeft className="cursor-pointer transition-all text-5xl" />
                                 <p className="text-lg border-t white font-bold">Vissza</p>
                             </button>
+
+                            {/* URL has id */}
                             {id &&
                                 <button
                                     onClick={handleDelete}

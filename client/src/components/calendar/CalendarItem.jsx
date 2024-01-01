@@ -1,10 +1,11 @@
 
 
 import { FaRegCalendar } from "react-icons/fa";
-import { formatDate } from "../../lib/common";
 import uuid from "react-uuid";
 import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
+
+import { formatDate } from "../../lib/common";
 import { DataContext } from "../../context/DataContext";
 
 
@@ -26,6 +27,7 @@ function DateItem({ day, setSelectedDate, isWrapped, style, isOpen, setIsOpen })
     }, [])
 
 
+    // Calendar Cell Component
     function DisplayDate() {
         if (isWrapped) {
             return (
@@ -48,6 +50,7 @@ function DateItem({ day, setSelectedDate, isWrapped, style, isOpen, setIsOpen })
     }
 
 
+    // Calendar Cell Event
     function EventItem({ item }) {
         if (isWrapped) {
             return (
@@ -67,6 +70,7 @@ function DateItem({ day, setSelectedDate, isWrapped, style, isOpen, setIsOpen })
         )
     }
 
+    // List of events in calendar cell
     function ListOfEvents({ events }) {
         return (
             <div className={wrappedSytle}>
@@ -78,6 +82,8 @@ function DateItem({ day, setSelectedDate, isWrapped, style, isOpen, setIsOpen })
             </div>)
     }
 
+
+    // Return DateItem Component
     return (
         <div
             className={style}
