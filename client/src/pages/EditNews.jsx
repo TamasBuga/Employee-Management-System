@@ -87,7 +87,7 @@ export default function EditNews() {
             await axios.delete(`http://localhost:3000/api/v1/news/:${id}`,
                 { withCredentials: true })
                 .then(async () => {
-                    alert("Személy sikeresen törölve!");
+                    alert("Bejegyzés sikeresen törölve!");
                     if (newsItem.image) {
                         await axios.delete(`http://localhost:3000/api/v1/upload/:${newsItem.image}`,
                             { withCredentials: true })
@@ -100,13 +100,13 @@ export default function EditNews() {
                         .then(data => {
                             setNews(data.data.news);
                         }).catch(error => {
-                            alert("Hiba Történt a személyzet betöltésénél! " + error.message);
+                            alert("Hiba Történt a Bejegyzés betöltésénél! " + error.message);
                         });
                     setNewsItem(null);
                     navigate("/api/dashboard/home/news");
                 })
                 .catch(error => {
-                    alert("Hiba Történt a személy törlésénél! " + error.message);
+                    alert("Hiba Történt a Bejegyzés törlésénél! " + error.message);
                 });
         }
     };

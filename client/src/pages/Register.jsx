@@ -59,6 +59,8 @@ export default function Register() {
 
                 <Form className="flex flex-col gap-6 p-6 justify-center">
 
+                    <h1 className="text-3xl font-bold italic">Jogosultság hozzáadása (admin)</h1>
+
                     {/* Username */}
                     <UserInput
                         label={"Felhasználónév"}
